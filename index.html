@@ -1,64 +1,56 @@
-const EXERCISES = [
-      { muscle: 'Chest', name: 'Barbell Bench Press', type: 'r', variations: ['Flat','Close Grip','Paused','Smith Machine'], compound: true },
-      { muscle: 'Chest', name: 'Dumbbell Bench Press', type: 'r', variations: ['Flat','Neutral Grip','Single Arm'], compound: true },
-      { muscle: 'Chest', name: 'Incline Dumbbell Press', type: 'r', variations: ['30°','45°','Neutral Grip'], compound: true },
-      { muscle: 'Chest', name: 'Machine Chest Press', type: 'r', variations: ['Seated','Converging'], compound: true },
-      { muscle: 'Chest', name: 'Cable Fly', type: 'r', variations: ['Mid','Low-to-High','High-to-Low','Single Arm'] },
-      { muscle: 'Chest', name: 'Pec Deck', type: 'r', variations: ['Standard','Single Arm','Slow Negative'] },
-      { muscle: 'Chest', name: 'Push-Up', type: 'b', variations: ['Standard','Incline','Decline','Diamond'] },
-      { muscle: 'Back', name: 'Lat Pulldown', type: 'r', variations: ['Wide Grip','Close Grip','Neutral Grip','Single Arm'], compound: true },
-      { muscle: 'Back', name: 'Seated Cable Row', type: 'r', variations: ['Close Grip','Wide Grip','Single Arm'], compound: true },
-      { muscle: 'Back', name: 'Chest-Supported Row', type: 'r', variations: ['Dumbbell','Machine','T-Bar'], compound: true },
-      { muscle: 'Back', name: 'One-Arm Dumbbell Row', type: 'r', variations: ['Bench Supported','Free Standing'], compound: true },
-      { muscle: 'Back', name: 'Romanian Deadlift', type: 'r', variations: ['Barbell','Dumbbell','Single Leg'], compound: true },
-      { muscle: 'Back', name: 'Pull-Up', type: 'b', variations: ['Pronated','Neutral','Assisted'] },
-      { muscle: 'Shoulders', name: 'Dumbbell Shoulder Press', type: 'r', variations: ['Seated','Standing','Arnold'], compound: true },
-      { muscle: 'Shoulders', name: 'Machine Shoulder Press', type: 'r', variations: ['Seated','Neutral Grip'], compound: true },
-      { muscle: 'Shoulders', name: 'Lateral Raise', type: 'r', variations: ['Dumbbell','Cable','Machine','Leaning'] },
-      { muscle: 'Shoulders', name: 'Rear Delt Fly', type: 'r', variations: ['Dumbbell','Cable','Machine'] },
-      { muscle: 'Shoulders', name: 'Face Pull', type: 'r', variations: ['Rope','Band'] },
-      { muscle: 'Biceps', name: 'Dumbbell Curl', type: 'r', variations: ['Standing','Alternating','Incline'] },
-      { muscle: 'Biceps', name: 'Hammer Curl', type: 'r', variations: ['Dumbbell','Rope Cable','Cross-Body'] },
-      { muscle: 'Biceps', name: 'Preacher Curl', type: 'r', variations: ['EZ Bar','Dumbbell','Machine'] },
-      { muscle: 'Biceps', name: 'Cable Curl', type: 'r', variations: ['Bar','Single Arm','Overhead'] },
-      { muscle: 'Triceps', name: 'Rope Pushdown', type: 'r', variations: ['Standard','Single Arm'] },
-      { muscle: 'Triceps', name: 'Straight-Bar Pushdown', type: 'r', variations: ['Straight Bar','V-Bar'] },
-      { muscle: 'Triceps', name: 'Overhead Triceps Extension', type: 'r', variations: ['Dumbbell','Cable','EZ Bar'] },
-      { muscle: 'Triceps', name: 'Skull Crusher', type: 'r', variations: ['EZ Bar','Dumbbell'] },
-      { muscle: 'Legs', name: 'Goblet Squat', type: 'r', variations: ['Dumbbell','Kettlebell','Box'], compound: true },
-      { muscle: 'Legs', name: 'Leg Press', type: 'r', variations: ['45°','Horizontal','Single Leg'], compound: true },
-      { muscle: 'Legs', name: 'Leg Extension', type: 'r', variations: ['Both Legs','Single Leg'] },
-      { muscle: 'Legs', name: 'Leg Curl', type: 'r', variations: ['Lying','Seated'] },
-      { muscle: 'Legs', name: 'Calf Raise', type: 'r', variations: ['Standing','Seated','Leg Press'] },
-      { muscle: 'Core', name: 'Plank', type: 't', variations: ['Standard','Side','Weighted'] },
-      { muscle: 'Core', name: 'Dead Bug', type: 'b', variations: ['Standard','Weighted'] },
-      { muscle: 'Core', name: 'Cable Crunch', type: 'r', variations: ['Rope','Kneeling'] },
-      { muscle: 'Core', name: 'Hanging Leg Raise', type: 'b', variations: ['Straight Leg','Bent Knee'] },
-      { muscle: 'Cardio', name: 'Treadmill Walk', type: 'c', variations: ['Flat','Incline'] },
-      { muscle: 'Cardio', name: 'Stationary Bike', type: 'c', variations: ['Steady','Intervals'] },
-      { muscle: 'Cardio', name: 'Rowing Machine', type: 'c', variations: ['Steady','Intervals'] },
-      { muscle: 'Mobility', name: 'Cat-Cow', type: 't', variations: ['Standard'] },
-      { muscle: 'Mobility', name: 'Hip Flexor Stretch', type: 't', variations: ['Half Kneeling','Standing'] },
-      { muscle: 'Mobility', name: 'Thoracic Rotation', type: 't', variations: ['Open Book','Quadruped'] }
-    ];
-
-    const EXERCISE_GIFS = {
-      'Barbell Bench Press': 'https://musclewiki.com/media/uploads/animation/male-barbell-bench-press-front.gif',
-      'Dumbbell Bench Press': 'https://musclewiki.com/media/uploads/animation/male-dumbbell-bench-press-front.gif',
-      'Incline Dumbbell Press': 'https://musclewiki.com/media/uploads/animation/male-incline-dumbbell-press-front.gif',
-      'Lat Pulldown': 'https://musclewiki.com/media/uploads/animation/male-lat-pulldown-front.gif',
-      'Seated Cable Row': 'https://musclewiki.com/media/uploads/animation/male-seated-cable-row-front.gif',
-      'Pull-Up': 'https://musclewiki.com/media/uploads/animation/male-bodyweight-pullup-front.gif',
-      'Dumbbell Shoulder Press': 'https://musclewiki.com/media/uploads/animation/male-dumbbell-shoulder-press-front.gif',
-      'Lateral Raise': 'https://musclewiki.com/media/uploads/animation/male-dumbbell-lateral-raise-front.gif',
-      'Dumbbell Curl': 'https://musclewiki.com/media/uploads/animation/male-dumbbell-curl-front.gif',
-      'Hammer Curl': 'https://musclewiki.com/media/uploads/animation/male-hammer-curl-front.gif',
-      'Rope Pushdown': 'https://musclewiki.com/media/uploads/animation/male-cable-pushdown-front.gif',
-      'Goblet Squat': 'https://musclewiki.com/media/uploads/animation/male-goblet-squat-front.gif',
-      'Leg Press': 'https://musclewiki.com/media/uploads/animation/male-leg-press-front.gif',
-      'Leg Curl': 'https://musclewiki.com/media/uploads/animation/male-lying-leg-curl-front.gif',
-      'Plank': 'https://musclewiki.com/media/uploads/animation/male-plank-front.gif',
-      'Dead Bug': 'https://musclewiki.com/media/uploads/animation/male-dead-bug-front.gif'
-    };
-
-    const MUSCLES = ['Chest','Back','Shoulders','Biceps','Triceps','Legs','Core','Cardio','Mobility'];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="refresh" content="0; url=./ironplan.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IronPlan Redirect</title>
+  <style>
+    :root {
+      --bg: #0b0c0e;
+      --card: #16181c;
+      --ink: #f2f4f0;
+      --mut: #8b919a;
+      --line: #2a2e35;
+      --acc: #c6ff3d;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.4 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 20px;
+      text-align: center;
+      max-width: 420px;
+      width: calc(100% - 32px);
+    }
+    .tag {
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    a {
+      color: var(--acc);
+      text-decoration: none;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="tag">IronPlan</div>
+    <h1>Redirecting…</h1>
+    <p>If you are not redirected automatically, open <a href="./ironplan.html">ironplan.html</a>.</p>
+  </div>
+</body>
+</html>
