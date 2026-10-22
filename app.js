@@ -1,4 +1,4 @@
-const EXERCISES = [
+const EXERCISES = window.EXERCISES || [
   { muscle: 'Chest', name: 'Barbell Bench Press', type: 'r', variations: ['Flat','Close Grip','Paused','Smith Machine'] },
   { muscle: 'Chest', name: 'Dumbbell Bench Press', type: 'r', variations: ['Flat','Neutral Grip','Single Arm'] },
   { muscle: 'Chest', name: 'Incline Dumbbell Press', type: 'r', variations: ['30°','45°','Neutral Grip'] },
@@ -26,7 +26,8 @@ const EXERCISES = [
   { muscle: 'Mobility', name: 'Hip Flexor Stretch', type: 't', variations: ['Half Kneeling','Standing'] }
 ];
 
-const MUSCLES = ['Chest','Back','Shoulders','Biceps','Triceps','Legs','Core','Cardio','Mobility'];
+const MUSCLES = window.MUSCLES || ['Chest','Back','Shoulders','Biceps','Triceps','Legs','Core','Cardio','Mobility'];
+
 const storageKey = 'ironplan-state-v1';
 const state = {
   tab: 'today',
